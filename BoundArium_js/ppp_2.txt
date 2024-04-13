@@ -1,0 +1,82 @@
+
+  {
+    id:0,
+    x: 0 ,
+    y: -4 ,
+    size: 144,
+    vx: 3, // X方向の速度
+    vy: 3, // Y方向の速度
+    soundTop: freq.do1,
+    soundRight: freq.do1,
+    soundBottom: freq.do1,
+    soundLeft: freq.do1,
+    color: "#C14F9B",
+    radiusNum: 5
+  },
+  {
+    id:0,
+    x: 0 ,
+    y: -1 ,
+    size: 48,
+    vx: 0, // X方向の速度
+    vy: 2, // Y方向の速度
+    soundTop: freq.do1,
+    soundRight: freq.re1,
+    soundBottom: freq.mi1,
+    soundLeft: freq.so1,
+    color: "#653B9A",
+    radiusNum: 5
+  },
+  {
+    id:0,
+    x: 0 ,
+    y: 2 ,
+    size: 48,
+    vx: 1, // X方向の速度
+    vy: 3, // Y方向の速度
+    soundTop: freq.so1,
+    soundRight: freq.ra1,
+    soundBottom: freq.mi1,
+    soundLeft: freq.do2,
+    color: "#DB504A",
+    radiusNum: 5
+  },  {
+    id:0,
+    x: -2 ,
+    y: 3 ,
+    size: 48,
+    vx: -1, // X方向の速度
+    vy: -2, // Y方向の速度
+    soundTop: freq.shi1,
+    soundRight: freq.ra1,
+    soundBottom: freq.re1,
+    soundLeft: freq.do2,
+    color: "#E3B505",
+    radiusNum: 5
+  },  {
+    id:0,
+    x: 3 ,
+    y: 4 ,
+    size: 48,
+    vx: 1, // X方向の速度
+    vy: 3, // Y方向の速度
+    soundTop: freq.so1,
+    soundRight: freq.ra1,
+    soundBottom: freq.fa1,
+    soundLeft: freq.do2,
+    color: "#4F6D7A",
+    radiusNum: 5
+  },  {
+    id:0,
+    x: 1 ,
+    y: -2 ,
+    size: 48,
+    vx: 1, // X方向の速度
+    vy: 2, // Y方向の速度
+    soundTop: freq.so1,
+    soundRight: freq.ra1,
+    soundBottom: freq.so1,
+    soundLeft: freq.do2,
+    color: "#56A3A6",
+    radiusNum: 5
+  }

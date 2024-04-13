@@ -1,0 +1,186 @@
+
+:root {
+  --main-bg-color: #ffffff;
+  --main-item-color:  #d6d3d3;
+}
+
+html, body {
+  height: 100%; /* ビューポートの高さを全て使用 */
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* 水平方向の中央揃え */
+  align-items: center; /* 垂直方向の中央揃え */
+  flex-direction: column; /* 子要素を縦方向に配置 */
+  text-align: center;
+  background-color: var(--main-bg-color);
+}
+
+#container {
+  
+  position: absolute;
+  display: flex;
+  align-items: center; /* 垂直方向の中央揃え */
+  justify-content: center; /* 水平方向の中央揃え */
+  width: 100vw; /* ビューポートの幅の100% */
+  height: 100vw;
+  overflow: hidden; /* コンテンツがcontainerをはみ出した場合に隠す */
+  margin-bottom: 20px;
+}
+
+#pinballCanvas {
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+#effeCanvas-n {
+  position: absolute;
+  margin-top: -482px;
+  width: 422px;
+  height: 50px;
+}
+#effeCanvas-e {
+  position: absolute;
+  margin-left: 482px;
+  width: 50px;
+  height: 422px;
+}
+#effeCanvas-s {
+  position: absolute;
+  margin-top: 482px;
+  width: 422px;
+  height: 50px;
+}
+#effeCanvas-w {
+  position: absolute;
+  margin-right: 482px;
+  width: 50px;
+  height: 422px;
+}
+
+#buttonContainer {
+  display: flex;
+  flex-direction: row; /* ボタンを横方向に並べる */
+  justify-content: center; /* 水平方向の中央揃え */
+  align-items: center; /* 垂直方向の中央揃え */
+  position: absolute;
+  margin-top: 632px;
+  width: 100%;
+}
+
+#buttonContainer button {
+  background-color: var(--main-bg-color);/* ボタンの背景色を黒に設定 */
+  border: none; /* ボタンの境界線を削除 */
+  padding: 10px; /* ボタンの内側の余白 */
+  cursor: pointer; /* ホバー時のカーソルをポインターに設定 */
+  border-radius: 20px;
+  margin: 5px; /* ボタンの間隔を追加 */
+}
+
+#buttonContainer button.playing {
+  filter: brightness(75%); /* ボタンの明るさを75%に下げる */
+}
+
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 var(--hover); }
+}
+
+#buttonContainer button i {
+  color: var(--main-item-color); /* アイコンの色を白に設定 */
+}
+
+#editContainer {
+  position: absolute;
+  display: flex;
+  justify-content: center; /* 水平方向の中央揃え */
+  align-items: center; /* 垂直方向の中央揃え */
+  flex-direction: column; /* 子要素を縦方向に配置 */
+  text-align: center;
+  padding: 72px;
+  opacity: 0;
+}
+
+#editCanvas {
+  position: absolute;
+  display: flex;
+  align-items: center; /* 垂直方向の中央揃え */
+  justify-content: center; /* 水平方向の中央揃え */
+  flex-direction: row;
+  text-align: center;
+  padding: 0px;
+}
+
+#editButtonContainer {
+  position: absolute;
+  display: flex;
+  align-items: center; /* 垂直方向の中央揃え */
+  flex-direction: column; /* 子要素を縦方向に配置 */
+  padding: 10px;
+  margin-right: 386px;
+
+}
+
+#editButtonContainer button {
+  color: var(--main-item-color);
+  background-color: var(--main-bg-color);/* ボタンの背景色を黒に設定 */
+  border: none; /* ボタンの境界線を削除 */
+  padding: 10px; /* ボタンの内側の余白 */
+  cursor: pointer; /* ホバー時のカーソルをポインターに設定 */
+  border-radius: 20px;
+  margin: 5px; /* ボタンの間隔を追加 */
+}
+#editContainer button.playing {
+  filter: brightness(75%); /* ボタンの明るさを75%に下げる */
+}
+
+#pianotileContainer{
+  margin-top: 380px;
+  margin-left: 40px;
+  opacity: 0;
+}
+
+.row {
+  display: flex;
+}
+.square {
+  width: 20px;
+  height: 21.5px;
+  border-radius: 2.5px;
+}
+
+.square:hover {
+  cursor: pointer;
+}
+
+.blank {
+  width: 26px;
+}
+.first-row  {
+  margin-left: 15px;
+}
+
+.first-row .square {
+  background-color: var(--main-item-color);
+  border: 0px solid var(--main-bg-color);
+  flex-direction: row; 
+  margin: 2.5px; 
+}
+
+.second-row .square {
+  background-color: var(--main-bg-color);
+  border: 1.5px solid var(--main-item-color);
+  flex-direction: row; 
+  margin: 2.5px; 
+}
+.second-row-1 .square {
+  margin-left: 4px; 
+}
+.second-row-2 .square {
+  margin-right: 4px; 
+}
+.first-row .square:nth-child(6),
+.first-row .square:nth-child(7) {
+    margin-right: 60px; /* To create space between the 5th and 6th squares */
+}
