@@ -1,0 +1,55 @@
+[
+  {
+    id:0,
+    x: 0 ,
+    y: -4 ,
+    size: 48,
+    vx: 4, // X方向の速度
+    vy: 4, // Y方向の速度
+    soundTop: freq.do1,
+    soundRight: freq.fa1,
+    soundBottom: freq.do2,
+    soundLeft: freq.so1,
+    color: "orange",
+    radiusNum: 5
+  },  {
+    id:0,
+    x: 1 ,
+    y: -3 ,
+    size: 48,
+    vx: 4, // X方向の速度
+    vy: 4, // Y方向の速度
+    soundTop: freq.re1,
+    soundRight: freq.mi1,
+    soundBottom: freq.shi1,
+    soundLeft: freq.ra1,
+    color: "red",
+    radiusNum: 5
+  },  {
+    id:0,
+    x: 2 ,
+    y: -2 ,
+    size: 48,
+    vx: 4, // X方向の速度
+    vy: 4, // Y方向の速度
+    soundTop: freq.mi1,
+    soundRight: freq.re1,
+    soundBottom: freq.ra1,
+    soundLeft: freq.shi1,
+    color: "green",
+    radiusNum: 5
+  },  {
+    id:0,
+    x: 3 ,
+    y: -1 ,
+    size: 48,
+    vx: 4, // X方向の速度
+    vy: 4, // Y方向の速度
+    soundTop: freq.fa1,
+    soundRight: freq.do1,
+    soundBottom: freq.so1,
+    soundLeft: freq.do2,
+    color: "blue",
+    radiusNum: 5
+  }
+]
