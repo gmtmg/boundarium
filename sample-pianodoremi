@@ -1,0 +1,55 @@
+[
+  {
+    id:0,
+    x: 0 ,
+    y: -4 ,
+    size: 48,
+    vx: 4, // X方向の速度
+    vy: 4, // Y方向の速度
+    soundTop: freq.piano.do1,
+    soundRight: freq.piano.fa1,
+    soundBottom: freq.piano.do2,
+    soundLeft: freq.piano.so1,
+    color: "orange",
+    radiusNum: 5
+  },  {
+    id:0,
+    x: 1 ,
+    y: -3 ,
+    size: 48,
+    vx: 2, // X方向の速度
+    vy: 4, // Y方向の速度
+    soundTop: freq.piano.re1,
+    soundRight: freq.piano.mi1,
+    soundBottom: freq.piano.shi1,
+    soundLeft: freq.piano.ra1,
+    color: "red",
+    radiusNum: 5
+  },  {
+    id:0,
+    x: 2 ,
+    y: -2 ,
+    size: 48,
+    vx: 4, // X方向の速度
+    vy: -2, // Y方向の速度
+    soundTop: freq.piano.mi1,
+    soundRight: freq.piano.re1,
+    soundBottom: freq.piano.ra1,
+    soundLeft: freq.piano.shi1,
+    color: "green",
+    radiusNum: 5
+  },  {
+    id:0,
+    x: 3 ,
+    y: -1 ,
+    size: 48,
+    vx: 1, // X方向の速度
+    vy: 2, // Y方向の速度
+    soundTop: freq.piano.fa1,
+    soundRight: freq.piano.do1,
+    soundBottom: freq.piano.so1,
+    soundLeft: freq.piano.do2,
+    color: "blue",
+    radiusNum: 5
+  }
+]
