@@ -1,8 +1,22 @@
 // boundArium.js
 
 const freq = {
-  do1: 261.63, re1: 293.66, mi1: 329.63, fa1: 349.23, so1: 392.50, so_ra_1: 417, ra1: 440.00, shi1: 493.88, do2: 523.25
+
+  beep : {
+    do1: 261.63, re1: 293.66, mi1: 329.63, fa1: 349.23, so1: 392.50, so_ra_1: 417, ra1: 440.00, shi1: 493.88, do2: 523.25
+  },
+  piano : {
+    do1  :"soundSource/do1_piano.mp3",
+    re1  :"soundSource/re1_piano.mp3",
+    mi1  :"soundSource/mi1_piano.mp3",
+    fa1  :"soundSource/fa1_piano.mp3",
+    so1  :"soundSource/so1_piano.mp3",
+    ra1  :"soundSource/ra1_piano.mp3",
+    shi1 :"soundSource/shi1_piano.mp3",
+    do2  :"soundSource/do2_piano.mp3",
+  }
 };
+
 
 // Canvasの設定
 const canvas = document.getElementById('pinballCanvas');
@@ -26,20 +40,52 @@ canvas.width = squareSize;
 canvas.height = squareSize;
 const squareX = (canvas.width - squareSize) / 2;
 const squareY = (canvas.height - squareSize) / 2;
-console.log(canvas.width);
-console.log(canvas.height);
+
+const buttonContainer = document.getElementById('buttonContainer');
+const buttonstyle = window.getComputedStyle(buttonContainer);
+let roundColor = buttonstyle.getPropertyValue("--main-button-color");
 
 // AudioContextの初期化
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
 // 簡単なビープ音を鳴らす関数
-function playSound(soundType) {
-  const oscillator = audioCtx.createOscillator();
-  oscillator.type = "square"; // 音の形状
-  oscillator.frequency.setValueAtTime(soundType, audioCtx.currentTime); // A4の音（440Hz）
-  oscillator.connect(audioCtx.destination);
-  oscillator.start();
-  oscillator.stop(audioCtx.currentTime + 0.11); // 0.1秒後に停止
+function playSound(soundType, gainN) {
+  if(!isNaN(soundType)){
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    // 音量の設定 (1.0が標準の音量)
+    gainN = gainN / 4
+    console.log(Math.abs(gainN));
+    gainNode.gain.value = Math.abs(gainN);
+    oscillator.type = "square"; // 音の形状
+    oscillator.frequency.setValueAtTime(soundType, audioCtx.currentTime); // A4の音（440Hz）
+    oscillator.connect(audioCtx.destination);
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.11); // 0.1秒後に停止
+  }else{
+    let source = audioCtx.createBufferSource();
+    const gainNode = audioCtx.createGain();
+    // 音量の設定 (1.0が標準の音量)
+    gainN = gainN / 4
+    console.log(Math.abs(gainN));
+    gainNode.gain.value = Math.abs(gainN);
+    let request = new XMLHttpRequest();
+    request.open('GET', soundType, true);
+    request.responseType = 'arraybuffer';
+    request.send();
+    
+    request.onload = function () {
+      let res = request.response;
+      audioCtx.decodeAudioData(res, function (buf) {
+        source.buffer = buf;
+      });
+    };
+    source.connect(audioCtx.destination);
+    source.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    source.start(0);
+  }
 }
 
 // ピンボールオブジェクトの配列を定義
@@ -53,41 +99,65 @@ let pinballs = [
     x: 0 ,
     y: -4 ,
     size: 48,
+    vx: 4, // X方向の速度
+    vy: 4, // Y方向の速度
+    soundTop: freq.piano.do1,
+    soundRight: freq.piano.fa1,
+    soundBottom: freq.piano.do2,
+    soundLeft: freq.piano.so1,
+    color: "#2e2b4a",
+    radiusNum: 5
+  },  {
+    id:0,
+    x: 1 ,
+    y: -3 ,
+    size: 48,
     vx: 2, // X方向の速度
+    vy: 4, // Y方向の速度
+    soundTop: freq.piano.re1,
+    soundRight: freq.piano.mi1,
+    soundBottom: freq.piano.shi1,
+    soundLeft: freq.piano.ra1,
+    color: "#690571",
+    radiusNum: 5
+  },  {
+    id:0,
+    x: 2 ,
+    y: -2 ,
+    size: 48,
+    vx: 4, // X方向の速度
+    vy: -2, // Y方向の速度
+    soundTop: freq.piano.mi1,
+    soundRight: freq.piano.re1,
+    soundBottom: freq.piano.ra1,
+    soundLeft: freq.piano.shi1,
+    color: "#c73364",
+    radiusNum: 5
+  },  {
+    id:0,
+    x: 3 ,
+    y: -1 ,
+    size: 48,
+    vx: 1, // X方向の速度
     vy: 2, // Y方向の速度
-    soundTop: freq.do1,
-    soundRight: freq.re1,
-    soundBottom: freq.mi1,
-    soundLeft: freq.so1,
-    color: "orange",
+    soundTop: freq.piano.fa1,
+    soundRight: freq.piano.do1,
+    soundBottom: freq.piano.so1,
+    soundLeft: freq.piano.do2,
+    color: "#f7c64a",
     radiusNum: 5
-  },
-  {
+  },  {
     id:0,
-    x: 4 ,
-    y: 0 ,
+    x: -2 ,
+    y: -1 ,
     size: 48,
-    vx: 2, // X方向の速度
-    vy: 3, // Y方向の速度
-    soundTop: freq.so1,
-    soundRight: freq.ra1,
-    soundBottom: freq.mi1,
-    soundLeft: freq.do2,
-    color: "green",
-    radiusNum: 5
-  },
-  {
-    id:0,
-    x: 4 ,
-    y: 3 ,
-    size: 48,
-    vx: 3, // X方向の速度
-    vy: 0, // Y方向の速度
-    soundTop: freq.so1,
-    soundRight: freq.ra1,
-    soundBottom: freq.mi1,
-    soundLeft: freq.do2,
-    color: "purple",
+    vx: 1, // X方向の速度
+    vy: -2, // Y方向の速度
+    soundTop: freq.piano.fa1,
+    soundRight: freq.piano.do1,
+    soundBottom: freq.piano.so1,
+    soundLeft: freq.piano.do2,
+    color: "#f28482",
     radiusNum: 5
   }
 ];
@@ -126,14 +196,14 @@ function drawRoundedSquare(ctx, x, y, size, radius) {
   ctx.closePath();
   
   // 線の設定
-  ctx.strokeStyle = "rgb(66, 65, 65)"; // 線の色
-  ctx.lineWidth = 2; // 線の太さ、0ではなく適切な値に
-  ctx.stroke(); // 線を描画
+  //ctx.strokeStyle = roundColor; // 線の色
+  //ctx.lineWidth = 2; // 線の太さ、0ではなく適切な値に
+  //ctx.stroke(); // 線を描画
 }
 
 // 正方形の枠線を描画
 function drawSquare() {
-  ctx.strokeStyle = "rgb(66, 65, 65)"; // 線の色
+  //ctx.strokeStyle = roundColor; // 線の色
   drawRoundedSquare(ctx, squareX, squareY, squareSize, 10);
 }
 
@@ -162,7 +232,7 @@ function slideAndFade(colorS, xS, speedS, cvs, con) {
   function draw() {
     cvs.clearRect(0, 0, con.width, con.height);
     cvs.fillStyle = color; // カラーコードを使用
-    cvs.fillRect(xS, 0, 10, con.height);
+    cvs.fillRect(xS, 0, 12, con.height);
     xS -= speed;
     opacity -= 0.1;
     cvs.globalAlpha = opacity; // 透明度を設定
@@ -181,7 +251,7 @@ function slideAndFadeHorizontal(colorS, yS, speedS, cvs, con) {
   function draw() {
     cvs.clearRect(0, 0, con.width, con.height);
     cvs.fillStyle = color; // カラーコードを使用
-    cvs.fillRect(0, yS,  con.width, 5);
+    cvs.fillRect(0, yS,  con.width, 6);
     yS -= speed; // 上に移動するため、y座標を減算する
     opacity -= 0.1;
     cvs.globalAlpha = opacity; // 透明度を設定
@@ -190,7 +260,6 @@ function slideAndFadeHorizontal(colorS, yS, speedS, cvs, con) {
         requestAnimationFrame(draw);
     }
   }
-  
   draw();
 }
 
@@ -201,25 +270,25 @@ function updatePinballs() {
     // 右か左の壁に当たった場合
     if (pinball.x <= squareX + pinball.size / 2 ){
       pinball.vx *= -1; // X方向の速度の符号を反転
-      playSound(pinball.soundLeft);
+      playSound(pinball.soundLeft, pinball.vx);
       // ここにエフェクトの関数を作りたい
       slideAndFade(pinball.color, 280, pinball.vx, ctxefW, effeCanvasW);
 
     }
     if (pinball.x >= squareX + squareSize - pinball.size / 2){
       pinball.vx *= -1; // X方向の速度の符号を反転
-      playSound(pinball.soundRight);
+      playSound(pinball.soundRight, pinball.vx);
       slideAndFade(pinball.color, 0, pinball.vx, ctxefE, effeCanvasE); 
     }
     // 上か下の壁に当たった場合
     if (pinball.y <= squareY + pinball.size / 2){
       pinball.vy *= -1; // Y方向の速度の符号を反転
-      playSound(pinball.soundTop);
+      playSound(pinball.soundTop, pinball.vy);
       slideAndFadeHorizontal(pinball.color, 140, pinball.vy, ctxefN, effeCanvasN); 
     }
     if (pinball.y >= squareY + squareSize - pinball.size / 2){
       pinball.vy *= -1; // Y方向の速度の符号を反転
-      playSound(pinball.soundBottom);
+      playSound(pinball.soundBottom, pinball.vy);
       slideAndFadeHorizontal(pinball.color, 0, pinball.vy, ctxefS, effeCanvasS); 
     }
     
@@ -331,12 +400,15 @@ pianotile.addEventListener('click', function() {
   }else{
     pianotileContainer.style.opacity = "0";
     pianoFlag = false;
-  }
-  
-  
+  }  
 });
 
+drawSquare();
 
+pinballs.forEach(pinball => {
+  ctx.fillStyle = pinball.color;
+  drawRoundedRect(ctx, pinball.x - pinball.size / 2, pinball.y - pinball.size / 2, pinball.size, pinball.size, pinball.radiusNum); // ここでの10は角の丸みの半径
+});
 
 
 
@@ -344,17 +416,13 @@ pianotile.addEventListener('click', function() {
 function animate() {
   if (!isPlaying) return;
   ctx.clearRect(0, 0, canvas.width, canvas.height); // 画面をクリア
-  drawSquare(); // 枠線を再描画
+  //drawSquare(); // 枠線を再描画
   
   updatePinballs(); // ピンボールを更新
   requestAnimationFrame(animate); // 次のフレームを要求
 }
 
-drawSquare();
-pinballs.forEach(pinball => {
-  ctx.fillStyle = pinball.color;
-  drawRoundedRect(ctx, pinball.x - pinball.size / 2, pinball.y - pinball.size / 2, pinball.size, pinball.size, pinball.radiusNum); // ここでの10は角の丸みの半径
-});
+
 
 animate();
 

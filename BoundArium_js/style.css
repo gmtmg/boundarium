@@ -1,7 +1,8 @@
 
 :root {
-  --main-bg-color: #ffffff;
-  --main-item-color:  #d6d3d3;
+  --main-bg-color: #f1e7e3;
+  --main-item-color:  #e5dfdf;
+  --main-button-color: #4e4343;
 }
 
 html, body {
@@ -18,7 +19,6 @@ html, body {
 }
 
 #container {
-  
   position: absolute;
   display: flex;
   align-items: center; /* 垂直方向の中央揃え */
@@ -32,6 +32,7 @@ html, body {
 #pinballCanvas {
   margin: 0 auto;
   border-radius: 5px;
+  background-color: var(--main-item-color);
 }
 
 #effeCanvas-n {
@@ -65,7 +66,7 @@ html, body {
   justify-content: center; /* 水平方向の中央揃え */
   align-items: center; /* 垂直方向の中央揃え */
   position: absolute;
-  margin-top: 632px;
+  margin-top: 582px;
   width: 100%;
 }
 
@@ -75,11 +76,14 @@ html, body {
   padding: 10px; /* ボタンの内側の余白 */
   cursor: pointer; /* ホバー時のカーソルをポインターに設定 */
   border-radius: 20px;
-  margin: 5px; /* ボタンの間隔を追加 */
+  margin: 10px; /* ボタンの間隔を追加 */
+  width: 44px;
+  height: 44px;
+  font-size: 22px; 
 }
 
 #buttonContainer button.playing {
-  filter: brightness(75%); /* ボタンの明るさを75%に下げる */
+  filter: brightness(60%); /* ボタンの明るさを75%に下げる */
 }
 
 
@@ -88,7 +92,7 @@ html, body {
 }
 
 #buttonContainer button i {
-  color: var(--main-item-color); /* アイコンの色を白に設定 */
+  color: var(--main-button-color); /* アイコンの色を白に設定 */
 }
 
 #editContainer {
@@ -123,7 +127,7 @@ html, body {
 }
 
 #editButtonContainer button {
-  color: var(--main-item-color);
+  color: var(--main-button-color);
   background-color: var(--main-bg-color);/* ボタンの背景色を黒に設定 */
   border: none; /* ボタンの境界線を削除 */
   padding: 10px; /* ボタンの内側の余白 */
@@ -162,7 +166,7 @@ html, body {
 }
 
 .first-row .square {
-  background-color: var(--main-item-color);
+  background-color: var(--main-button-color);
   border: 0px solid var(--main-bg-color);
   flex-direction: row; 
   margin: 2.5px; 
@@ -170,7 +174,7 @@ html, body {
 
 .second-row .square {
   background-color: var(--main-bg-color);
-  border: 1.5px solid var(--main-item-color);
+  border: 1.5px solid var(--main-button-color);
   flex-direction: row; 
   margin: 2.5px; 
 }
