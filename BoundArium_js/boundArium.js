@@ -98,9 +98,9 @@ let pinballs = [
     id:0,
     x: 0 ,
     y: -4 ,
-    size: 48,
-    vx: 4, // X方向の速度
-    vy: 4, // Y方向の速度
+    size: 144,
+    vx: 3, // X方向の速度
+    vy: 3, // Y方向の速度
     soundTop: freq.piano.do1,
     soundRight: freq.piano.fa1,
     soundBottom: freq.piano.do2,
@@ -153,10 +153,10 @@ let pinballs = [
     size: 48,
     vx: 1, // X方向の速度
     vy: -2, // Y方向の速度
-    soundTop: freq.piano.fa1,
+    soundTop: freq.piano.ra1,
     soundRight: freq.piano.do1,
     soundBottom: freq.piano.so1,
-    soundLeft: freq.piano.do2,
+    soundLeft: freq.piano.mi1,
     color: "#f28482",
     radiusNum: 5
   }
