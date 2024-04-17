@@ -1,8 +1,8 @@
 
 :root {
-  --main-bg-color: #f1e7e3;
-  --main-item-color:  #e5dfdf;
-  --main-button-color: #4e4343;
+  --main-bg-color: #ffffff;
+  --main-item-color:  #ffffff;
+  --main-button-color: #ffffff;
 }
 
 html, body {
@@ -15,7 +15,7 @@ html, body {
   align-items: center; /* 垂直方向の中央揃え */
   flex-direction: column; /* 子要素を縦方向に配置 */
   text-align: center;
-  background-color: var(--main-bg-color);
+  
 }
 
 #container {
@@ -32,7 +32,6 @@ html, body {
 #pinballCanvas {
   margin: 0 auto;
   border-radius: 5px;
-  background-color: var(--main-item-color);
 }
 
 #effeCanvas-n {
@@ -71,7 +70,6 @@ html, body {
 }
 
 #buttonContainer button {
-  background-color: var(--main-bg-color);/* ボタンの背景色を黒に設定 */
   border: none; /* ボタンの境界線を削除 */
   padding: 10px; /* ボタンの内側の余白 */
   cursor: pointer; /* ホバー時のカーソルをポインターに設定 */
@@ -91,9 +89,6 @@ html, body {
   0% { box-shadow: 0 0 0 0 var(--hover); }
 }
 
-#buttonContainer button i {
-  color: var(--main-button-color); /* アイコンの色を白に設定 */
-}
 
 #editContainer {
   position: absolute;
