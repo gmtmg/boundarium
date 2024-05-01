@@ -90,7 +90,7 @@ html, body {
 }
 
 
-#editContainer {
+#editLeftContainer {
   position: absolute;
   display: flex;
   justify-content: center; /* 水平方向の中央揃え */
@@ -99,6 +99,51 @@ html, body {
   text-align: center;
   padding: 72px;
   opacity: 0;
+}
+
+#editRightContainer{
+  position: absolute;
+  display: flex;
+  justify-content: center; /* 水平方向の中央揃え */
+  align-items: center; /* 垂直方向の中央揃え */
+  flex-direction: column; /* 子要素を縦方向に配置 */
+  padding: 0%;
+  width: 80px;
+  height: 386px;
+  margin-left: 540px;
+  opacity: 1;
+}
+.editSquare {
+  opacity: 0; /* 最初は透明に */
+  animation: slideIn 0.8s forwards; /* アニメーションを適用 */
+  margin: 10px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(50px); /* 下からの位置 */
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0); /* 最終的な位置 */
+    /*opacity: 1; /* 完全に不透明 */
+  }
+}
+
+.editSquareContainer div {
+  opacity: 1; /* 最初は不透明 */
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+@keyframes fadeSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-100px); /* 上に100px移動 */
+  }
 }
 
 #editCanvas {
