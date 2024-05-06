@@ -83,7 +83,7 @@ const squareY = (canvas.height - squareSize) / 2;
 const buttonContainer = document.querySelectorAll('#buttonContainer button');
 const canvasStyle = window.getComputedStyle(canvas);
 let canvasColor = canvasStyle.getPropertyValue("--main-item-color");
-const shadowOffLen = squareSize / 5
+const shadowOffLen = squareSize / 4
 function generateColorScheme() {
   // ベースとなる色相（hue）をランダムに生成
   var baseHue = Math.random() * 360;
@@ -95,15 +95,15 @@ function generateColorScheme() {
   if (lightness<=10){mNum = 1}
   // ベースの色を基準にした配色パターンを生成
   var colorScheme = [
-      'hsl(' + baseHue + ', ' + saturation + '%, ' + (lightness + 0.1) + '%)',
+      'hsl(' + baseHue + ', ' + saturation + '%, ' + (lightness + 3) + '%)',
       'hsl(' + baseHue + ', ' + saturation + '%, ' + (lightness - 1) + '%)', // やや暗めの色
       'hsl(' + (baseHue  + 10*mNum) + ', ' + (saturation+20*mNum) + '%, ' + (lightness + 80*mNum) + '%)',
     
-      'hsl(' + (baseHue  + 15*mNum) + ', ' + (saturation+20*mNum) + '%, ' + (lightness + 50*mNum) + '%)', // やや明るめの色
-      'hsl(' + (baseHue  + 200*mNum) + ', ' + (saturation+40*mNum) + '%, ' + (lightness + 70*mNum) + '%)',
-      'hsl(' + (baseHue  + 100*mNum) + ', ' + (saturation+100*mNum) + '%, ' + (lightness + 80*mNum) + '%)',
+      'hsl(' + (baseHue  + 45*mNum) + ', ' + (saturation+20*mNum) + '%, ' + (lightness + 50*mNum) + '%)', // やや明るめの色
+      'hsl(' + (baseHue  + 15*mNum) + ', ' + (saturation+40*mNum) + '%, ' + (lightness + 80*mNum) + '%)',
+      'hsl(' + (baseHue  + 10*mNum) + ', ' + (saturation+15*mNum) + '%, ' + (lightness + 30*mNum) + '%)',
       'hsl(' + (baseHue  + 60*mNum) + ', ' + (saturation+30*mNum) + '%, ' + (lightness + 60*mNum) + '%)',
-      'hsl(' + (baseHue  + 200*mNum) + ', ' + (saturation+130*mNum) + '%, ' + (lightness + 30*mNum) + '%)',
+      'hsl(' + (baseHue  + 90*mNum) + ', ' + (saturation+10*mNum) + '%, ' + (lightness + 25*mNum) + '%)',
       'hsl(' + (baseHue  + 80*mNum) + ', ' + (saturation+30*mNum) + '%, ' + (lightness + 100*mNum) + '%)',
   ];
 
@@ -263,8 +263,8 @@ for (let i = 0; i < pinballLength; i++) {
   pinballs.push(
     {
       id:i,
-      x: -4,
-      y: 0,
+      x: randomPos(),
+      y: randomPos(),
       size: 48,
       vx: randomPos(), // X方向の速度
       vy: randomPos(), // Y方向の速度
@@ -359,7 +359,7 @@ function slideAndFade(colorS, xS, speedS, cvs, con) {
   function draw() {
     cvs.clearRect(0, 0, con.width, con.height);
     cvs.fillStyle = color; // カラーコードを使用
-    cvs.fillRect(xS, 0, 12, con.height);
+    cvs.fillRect(xS, 0, 14, con.height);
     xS -= speed;
     opacity -= 0.11;
     cvs.globalAlpha = opacity; // 透明度を設定
@@ -440,22 +440,27 @@ const resetButton = document.getElementById('resetButton')
 
 const editContainer = document.getElementById('editContainer');
 const editCanvas = document.getElementById('editCanvas');
-const editCtx = editCanvas.getContext('2d');
+//const editCtx = editCanvas.getContext('2d');
 const pianotile = document.getElementById('pianotile');
 const pianotileContainer = document.getElementById('pianotileContainer');
 let editNum = -1;
 
 function playSwith(){
   isPlaying = !isPlaying; // 再生状態を切り替える
-  const icon = playButton.querySelector('i');
-  if (isPlaying && editFlag) {
-    icon.className = 'fas fa-pause'; // 停止アイコンに変更
-    playButton.classList.add('playing');
-    animate(); // アニメーションを開始する
-  } else {
-    icon.className = 'fas fa-play'; // 再生アイコンに変更
-    playButton.classList.remove('playing'); 
-  }
+  //const icon = playButton.querySelector('i');
+  //if (isPlaying && editFlag) {
+    //icon.className = 'fas fa-pause'; // 停止アイコンに変更
+    //playButton.classList.add('playing');
+    if (isPlaying)  {
+      animate(); // アニメーションを開始する
+      
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ballRectSet(setPinballs, 1);
+      pinballs = JSON.parse(JSON.stringify(setPinballs));
+      //icon.className = 'fas fa-play'; // 再生アイコンに変更
+      //playButton.classList.remove('playing'); 
+    }
 }
 
 //editCanvas.addEventListener('click', function(e) {
@@ -470,13 +475,13 @@ function playSwith(){
 //  }
 //});
 
-function createButton(pinball) {
-  if(editFlag) return;
-  editNum = pinball.id
-  editCtx.clearRect(0, 0, editCanvas.width, editCanvas.height);
-  editCtx.fillStyle = pinball.color;
-  drawRoundedRect(editCtx, editCanvas.width / 2 - pinball.size / 2, editCanvas.height / 2 - pinball.size / 2, pinball.size, pinball.size, pinball.radiusNum, "fill");
-  }
+//function createButton(pinball) {
+//  if(editFlag) return;
+//  editNum = pinball.id
+//  editCtx.clearRect(0, 0, editCanvas.width, editCanvas.height);
+//  editCtx.fillStyle = pinball.color;
+//  drawRoundedRect(editCtx, editCanvas.width / 2 - pinball.size / 2, editCanvas.height / 2 - pinball.size / 2, pinball.size, pinball.size, pinball.radiusNum, "fill");
+//  }
 
 //canvas.addEventListener('click', function(e) {
 //  if(editFlag) return;
@@ -496,14 +501,15 @@ function createButton(pinball) {
 
 // ピンボールのアニメーションの再生状態を保持する変数
 // ボタンのイベントリスナーを設定
-playButton.addEventListener('click', function() {
-  if(!editFlag) return;
-  playSwith();
-});
+//playButton.addEventListener('click', function() {
+//  if(!editFlag) return;
+//  playSwith();
+//});
 
 const editSquareContainer = document.getElementById('editSquareContainer'); 
 let edittingNum = 0;
 
+ /* 
 editButton.addEventListener('click', function() {
   editFlag = !editFlag;
   if(!editFlag){
@@ -574,7 +580,7 @@ editButton.addEventListener('click', function() {
 });
 
 
-
+ */
 
 // 角丸正方形を描画する関数
 function drawRoundedEffectSquare(ctx, x, y, width, height, radius) {
@@ -709,25 +715,19 @@ function editPinball(idNum) {
 
 
 
+//resetButton.addEventListener('click', function() {
+//  ctx.clearRect(0, 0, canvas.width, canvas.height); // 画面をクリア
+//});
 
-
-
-
-
-
-resetButton.addEventListener('click', function() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height); // 画面をクリア
-});
-
-pianotile.addEventListener('click', function() {
-  if(!pianoFlag){
-    pianotileContainer.style.opacity = "1";
-    pianoFlag = true;
-  }else{
-    pianotileContainer.style.opacity = "0";
-    pianoFlag = false;
-  }  
-});
+//pianotile.addEventListener('click', function() {
+//  if(!pianoFlag){
+//    pianotileContainer.style.opacity = "1";
+//    pianoFlag = true;
+//  }else{
+//    pianotileContainer.style.opacity = "0";
+//    pianoFlag = false;
+//  }  
+//});
 
 drawSquare();
 
@@ -756,7 +756,7 @@ function animate() {
   requestAnimationFrame(animate); // 次のフレームを要求
 }
 
-
+canvas.addEventListener('click', playSwith);
 ballRectSet(pinballs, 1);
 animate();
 

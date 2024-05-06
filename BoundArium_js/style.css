@@ -59,32 +59,32 @@ html, body {
   height: 422px;
 }
 
-#buttonContainer {
+/* #buttonContainer {
   display: flex;
-  flex-direction: row; /* ボタンを横方向に並べる */
-  justify-content: center; /* 水平方向の中央揃え */
-  align-items: center; /* 垂直方向の中央揃え */
+  flex-direction: row; /
+  justify-content: center;
+  align-items: center; 
   position: absolute;
   margin-top: 582px;
   width: 100%;
 }
 
 #buttonContainer button {
-  border: none; /* ボタンの境界線を削除 */
-  padding: 10px; /* ボタンの内側の余白 */
-  cursor: pointer; /* ホバー時のカーソルをポインターに設定 */
+  border: none; 
+  padding: 10px; 
+  cursor: pointer; 
   border-radius: 20px;
-  margin: 10px; /* ボタンの間隔を追加 */
+  margin: 10px; 
   width: 44px;
   height: 44px;
   font-size: 22px; 
 }
 
 #buttonContainer button.playing {
-  filter: brightness(60%); /* ボタンの明るさを75%に下げる */
+  filter: brightness(60%); 
 }
 
-
+*/
 @keyframes pulse {
   0% { box-shadow: 0 0 0 0 var(--hover); }
 }
